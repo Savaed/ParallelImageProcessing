@@ -26,10 +26,10 @@ namespace ParallelImageProcessing
                 var watch = new Stopwatch();
 
                 // Synchronous GetSet method.
-                Run(manager, originalImage, watch, false);
+                Run(manager, originalImage, watch, false, kernelSize);
 
                 // Synchronous LockBits method.
-                Run(manager, originalImage, watch);
+                Run(manager, originalImage, watch, true, kernelSize);
 
                 var cts = new CancellationTokenSource();
                 cts.CancelAfter(parallelOperationTimeout);

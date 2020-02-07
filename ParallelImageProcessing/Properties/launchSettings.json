@@ -1,8 +1,7 @@
 {
   "profiles": {
     "ParallelImageProcessing": {
-      "commandName": "Project",
-      "commandLineArgs": "test museum-interior.jpg 3 50000"
+      "commandName": "Project"
     }
   }
 }
