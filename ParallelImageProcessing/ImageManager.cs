@@ -36,7 +36,7 @@ namespace ParallelImageProcessing
 
                 return new Bitmap(imagePath);
             }
-            catch (FileNotFoundException ex)
+            catch (Exception ex)
             {
                 Logger.Error($"File cannot be find. See more details: {ex.Message}");
                 throw;
@@ -121,7 +121,7 @@ namespace ParallelImageProcessing
             }
             catch (Exception ex)
             {
-                Logger.Error($"Operation failed because of unexpected error. See detials: {ex.Message}");
+                Logger.Error($"Operation failed because of unexpected error. See details: {ex.Message}");
                 throw;
             }
         }
@@ -179,7 +179,7 @@ namespace ParallelImageProcessing
             }
             catch (Exception ex)
             {
-                Logger.Error($"Operation failed because of unexpected error. See detials: {ex.Message}");
+                Logger.Error($"Operation failed because of unexpected error. See details: {ex.Message}");
                 throw;
             }
         }
@@ -239,7 +239,7 @@ namespace ParallelImageProcessing
             }
             catch (Exception ex)
             {
-                Logger.Error($"Operation failed because of unexpected error. See detials: {ex.Message}");
+                Logger.Error($"Operation failed because of unexpected error. See details: {ex.Message}");
                 throw;
             }
         }
@@ -291,7 +291,7 @@ namespace ParallelImageProcessing
             }
             catch (Exception ex)
             {
-                Logger.Error($"Operation failed because of unexpected error. See detials: {ex.Message}");
+                Logger.Error($"Operation failed because of unexpected error. See details: {ex.Message}");
                 throw;
             }
         }
@@ -401,7 +401,7 @@ namespace ParallelImageProcessing
             }
             catch (Exception ex)
             {
-                Logger.Error($"Operation failed because of unexpected error. See detials: {ex.Message}");
+                Logger.Error($"Operation failed because of unexpected error. See details: {ex.Message}");
                 throw;
             }
         }
@@ -477,7 +477,7 @@ namespace ParallelImageProcessing
             }
             catch (Exception ex)
             {
-                Logger.Error($"Operation failed because of unexpected error. See detials: {ex.Message}");
+                Logger.Error($"Operation failed because of unexpected error. See details: {ex.Message}");
                 throw;
             }
         }
@@ -553,7 +553,7 @@ namespace ParallelImageProcessing
             }
             catch (Exception ex)
             {
-                Logger.Error($"Operation failed because of unexpected error. See detials: {ex.Message}");
+                Logger.Error($"Operation failed because of unexpected error. See details: {ex.Message}");
                 throw;
             }
         }
@@ -621,7 +621,7 @@ namespace ParallelImageProcessing
             }
             catch (Exception ex)
             {
-                Logger.Error($"Operation failed because of unexpected error. See detials: {ex.Message}");
+                Logger.Error($"Operation failed because of unexpected error. See details: {ex.Message}");
                 throw;
             }
         }

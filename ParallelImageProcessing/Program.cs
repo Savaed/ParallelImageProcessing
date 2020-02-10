@@ -17,8 +17,7 @@ namespace ParallelImageProcessing
                 var parameters = GetProgramParameters(args);
                 string imagePath = parameters.Item1;
                 int kernelSize = parameters.Item2;
-                int item3 = parameters.Item3;
-                int parallelOperationTimeout = item3;
+                int parallelOperationTimeout = parameters.Item3;
 
                 var manager = new ImageManager();
                 var originalImage = manager.Open(imagePath);
@@ -43,7 +42,7 @@ namespace ParallelImageProcessing
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Error(ex.Message);
             }
         }
 
@@ -51,9 +50,20 @@ namespace ParallelImageProcessing
         #region Privates        
 
         private static void PrintHeader()
-        {
+        {            
+            Console.WriteLine(" _____                                                                    _");
+            Console.WriteLine("|_   _|                                                                  (_)");
+            Console.WriteLine("  | |  _ __ ___   __ _  __ _  ___     _ __  _ __ ___   ___ ___  ___ ___ _ _ __   __ _");
+            Console.WriteLine(@"  | | | '_ ` _ \ / _` |/ _` |/ _ \   | '_ \| '__/ _ \ / __/ _ \/ __/ __| | '_ \ / _` |");
+            Console.WriteLine(@" _| |_| | | | | | (_| | (_| |  __/   | |_) | | | (_) | (_|  __/\__ \__ \ | | | | (_| |");
+            Console.WriteLine(@"|_____|_| |_| |_|\__,_|\__, |\___|   | .__/|_|  \___/ \___\___||___/___/_|_| |_|\__, |");
+            Console.WriteLine("                        __/ |        | |                                         __/ |");
+            Console.WriteLine("                       |___/         |_|                                        |___/ ");
+            Console.WriteLine("\nVersion: 1.0");
+            Console.WriteLine("Release date: 8.02.2019\n");
+
             Console.WriteLine(string.Format("{0, -7} {1, -11} {2, -10} {3, -6} {4, -7} {5, -10} {6, -10}", "STATUS", "PROCESS", "PARALLEL", "TASKS", "KERNEL", "TIME[ms]", "DESCRIPTION"));
-            Console.WriteLine("----------------------------------------------------------------------------------------");
+            Console.WriteLine("--------------------------------------------------------------------------------------");
         }
 
         private static Tuple<string, int, int> GetProgramParameters(string[] args)
@@ -68,13 +78,13 @@ namespace ParallelImageProcessing
                     imagePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), args[1]);
             }
             else
-                throw new ArgumentException("Incorrect image path passed.", nameof(args));
+                throw new ArgumentException("Incorrect image path passed.");
 
-             if (!int.TryParse(args[2], out int kernelSize) || kernelSize < 3 || kernelSize % 2 == 0)
-                throw new ArgumentException("Incorrect kernel size passed.", nameof(args));
+            if (!int.TryParse(args[2], out int kernelSize) || kernelSize < 3 || kernelSize % 2 == 0)
+                throw new ArgumentException("Incorrect kernel size passed.");
 
             if (!int.TryParse(args[3], out int parallelOperationTimeout) || parallelOperationTimeout < 1)
-                throw new ArgumentException("Incorrect timeout passed.", nameof(args));
+                throw new ArgumentException("Incorrect timeout passed.");
             return new Tuple<string, int, int>(imagePath, kernelSize, parallelOperationTimeout);
         }
 

@@ -60,7 +60,7 @@ namespace ParallelImageProcessing
             }
             catch (Exception ex)
             {
-                Logger.Error($"Operation failed because of unexpected error. See detials: {ex.Message}");
+                Logger.Error($"Operation failed because of unexpected error. See details: {ex.Message}");
                 throw;
             }
         }
@@ -83,7 +83,8 @@ namespace ParallelImageProcessing
                               status,
                               process,
                               parallel ? "Yes" : "No",
-                              tasksNumber, kernelSize > 0 ? $"{kernelSize.ToString()}x{kernelSize.ToString()}" : " -",
+                              tasksNumber, 
+                              kernelSize > 0 ? $"{kernelSize.ToString()}x{kernelSize.ToString()}" : " -",
                               miliseconds,
                               description));
             Console.ResetColor();

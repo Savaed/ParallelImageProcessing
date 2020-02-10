@@ -1,7 +1,6 @@
 {
   "profiles": {
     "ParallelImageProcessing": {
-      "commandName": "Project"
     }
   }
 }
