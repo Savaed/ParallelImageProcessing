@@ -1,0 +1,87 @@
+;This file was created by Graph (http://www.padowan.dk)
+;Do not change this file from other programs.
+[Graph]
+Version = 4.4.2.543
+MinVersion = 2.5
+OS = Windows NT 6.2 
+
+[Axes]
+xMin = 0
+xMax = 9.5
+xTickUnit = 1
+xGridUnit = 1
+xAutoTick = 0
+xLabel = tasks number
+yMin = 0
+yMax = 37
+yTickUnit = 2
+yGridUnit = 2
+yAutoTick = 0
+yLabel = time [s]
+AxesColor = clBlue
+GridColor = 0x00FF9999
+ShowLegend = 1
+Radian = 1
+Title = 41Mp image processing time. Kernel size=3
+AxesStyle = 2
+
+[PointSeries1]
+FillColor = clGreen
+LineColor = clGreen
+Size = 3
+Style = 0
+LineSize = 2
+LineStyle = 0
+Interpolation = 3
+LabelPosition = 1
+PointCount = 7
+Points = 1,35.819;2,18.633;3,12.698;4,10.047;5,10.568;6,10.143;7,10.403;
+LegendText = Blur - LockBits method
+
+[PointSeries2]
+FillColor = clYellow
+LineColor = clYellow
+Size = 3
+Style = 0
+LineSize = 2
+LineStyle = 0
+Interpolation = 1
+LabelPosition = 1
+PointCount = 7
+Points = 1,1.056;2,.725;3,.600;4,.533;5,.528;6,.515;7,.515;
+LegendText = Grayscale - LockBits method
+
+[PointSeries3]
+FillColor = clFuchsia
+LineColor = clFuchsia
+Size = 3
+Style = 0
+LineSize = 2
+LineStyle = 0
+Interpolation = 1
+LabelPosition = 1
+PointCount = 7
+Points = 1,24.324;2,13.209;3,9.293;4,7.645;5,7.681;6,7.977;7,7.869;
+LegendText = Median filter - LockBits method
+
+[PointSeries4]
+FillColor = clMoneyGreen
+LineColor = clMoneyGreen
+Size = 3
+Style = 0
+LineSize = 2
+LineStyle = 0
+Interpolation = 1
+LabelPosition = 1
+PointCount = 7
+Points = 1,1.040;2,.691;3,.578;4,.521;5,.527;6,.509;7,.511;
+LegendText = Invert - LockBits method
+
+[Data]
+TextLabelCount = 0
+FuncCount = 0
+PointSeriesCount = 4
+ShadeCount = 0
+RelationCount = 0
+OleObjectCount = 0
+

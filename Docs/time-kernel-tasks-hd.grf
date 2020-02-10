@@ -1,0 +1,87 @@
+;This file was created by Graph (http://www.padowan.dk)
+;Do not change this file from other programs.
+[Graph]
+Version = 4.4.2.543
+MinVersion = 2.5
+OS = Windows NT 6.2 
+
+[Axes]
+xMin = 0
+xMax = 10
+xTickUnit = 1
+xGridUnit = 1
+xAutoTick = 0
+xLabel = kernel size [pixel]
+yMin = 0
+yMax = 10000
+yTickUnit = 1000
+yGridUnit = 1000
+yAutoTick = 0
+yLabel = time [ms]
+AxesColor = clBlue
+GridColor = 0x00FF9999
+ShowLegend = 1
+Radian = 1
+Title = Parallel blur process time for Full HD image
+AxesStyle = 2
+
+[PointSeries1]
+FillColor = clMoneyGreen
+LineColor = clMoneyGreen
+Size = 3
+Style = 0
+LineSize = 2
+LineStyle = 0
+Interpolation = 3
+LabelPosition = 1
+PointCount = 3
+Points = 3,2048;5,4916;7,8695;
+LegendText = Blur on 1 task
+
+[PointSeries2]
+FillColor = clSkyBlue
+LineColor = clSkyBlue
+Size = 3
+Style = 0
+LineSize = 2
+LineStyle = 0
+Interpolation = 3
+LabelPosition = 1
+PointCount = 3
+Points = 3,1067;5,2341;7,4261;
+LegendText = Blur on 2 tasks
+
+[PointSeries3]
+FillColor = clFuchsia
+LineColor = clFuchsia
+Size = 3
+Style = 0
+LineSize = 2
+LineStyle = 0
+Interpolation = 3
+LabelPosition = 1
+PointCount = 3
+Points = 3,747;5,1579;7,2831;
+LegendText = Blur on 3 tasks
+
+[PointSeries4]
+FillColor = clGreen
+LineColor = clGreen
+Size = 3
+Style = 0
+LineSize = 2
+LineStyle = 0
+Interpolation = 3
+LabelPosition = 1
+PointCount = 3
+Points = 3,632;5,1263;7,2331;
+LegendText = Blur on 4 tasks
+
+[Data]
+TextLabelCount = 0
+FuncCount = 0
+PointSeriesCount = 4
+ShadeCount = 0
+RelationCount = 0
+OleObjectCount = 0
+

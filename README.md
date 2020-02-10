@@ -49,6 +49,16 @@ in RGB 100 100 100, the resulting colour is RGB 155 155 155.
 Changing the image contrast is the only process that actually has got no parallel implementation because it is very fast in 
 its basic form.
 
+## App output
+
+After starting the application, it prints on a screen a short information about the image processing.
+
+![console output](https://github.com/Savaed/ParallelImageProcessing/blob/master/Docs/console-output.png)
+
+More examples of app output as well as image processing statistics and charts are in the 
+[Docs](https://github.com/Savaed/ParallelImageProcessing/blob/master/Docs) folder.
+
+
 ## Local run
 
 Feel free to download this repository and develop it locally as you like. For those interested in how the application works

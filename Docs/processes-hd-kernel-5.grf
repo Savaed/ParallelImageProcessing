@@ -1,0 +1,56 @@
+;This file was created by Graph (http://www.padowan.dk)
+;Do not change this file from other programs.
+[Graph]
+Version = 4.4.2.543
+MinVersion = 2.5
+OS = Windows NT 6.2 
+
+[Axes]
+xMin = -1
+xMax = 8.5
+xTickUnit = 1
+xGridUnit = 1
+xAutoTick = 0
+xLabel = tasks number [units]
+yMin = -100
+yMax = 5000
+yTickUnit = 500
+yGridUnit = 500
+yLabel = time [ms]
+AxesColor = clBlue
+GridColor = 0x00FF9999
+ShowLegend = 1
+Radian = 1
+
+[PointSeries1]
+FillColor = clRed
+LineColor = clWhite
+Size = 3
+Style = 0
+LineSize = 2
+Interpolation = 2
+LabelPosition = 1
+PointCount = 7
+Points = 1,4916;2,2341;3,1579;4,1263;5,1319;6,1281;7,1284;
+LegendText = Blur - LockBits method
+
+[PointSeries2]
+FillColor = clLime
+LineColor = clWhite
+Size = 3
+Style = 0
+LineSize = 2
+Interpolation = 2
+LabelPosition = 1
+PointCount = 7
+Points = 1,3467;2,1779;3,1272;4,1024;5,1046;6,1375;7,1057;
+LegendText = Median filter - LockBits method
+
+[Data]
+TextLabelCount = 0
+FuncCount = 0
+PointSeriesCount = 2
+ShadeCount = 0
+RelationCount = 0
+OleObjectCount = 0
+
