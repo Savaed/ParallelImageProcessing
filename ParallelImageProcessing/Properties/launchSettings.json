@@ -1,6 +1,10 @@
 {
   "profiles": {
     "ParallelImageProcessing": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ENVIRONMENT": "Local"
+      }
     }
   }
 }

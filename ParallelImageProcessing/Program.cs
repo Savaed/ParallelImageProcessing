@@ -2,19 +2,35 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Threading;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 
 namespace ParallelImageProcessing
 {
     internal class Program
     {
+        private static string _appName;
+
         internal static void Main(string[] args)
         {
-            PrintHeader();
+            var hostBuilder = new HostBuilder().ConfigureHostConfiguration(configHost =>
+            {
+                configHost.AddEnvironmentVariables();
+                configHost.AddCommandLine(args);
+            })
+            .ConfigureAppConfiguration((hostingContext, cfg) =>
+            {
+                _appName = hostingContext.HostingEnvironment.ApplicationName;
+            })
+            .Build();
+
 
             try
             {
                 var parameters = GetProgramParameters(args);
+                PrintHeader(parameters);
                 string imagePath = parameters.Item1;
                 int kernelSize = parameters.Item2;
                 int parallelOperationTimeout = parameters.Item3;
@@ -42,15 +58,15 @@ namespace ParallelImageProcessing
             }
             catch (Exception ex)
             {
-                Logger.Error(ex.Message);
+                Logger.Error(ex.ToString());
             }
         }
 
 
         #region Privates        
 
-        private static void PrintHeader()
-        {            
+        private static void PrintHeader(Tuple<string, int, int> parameters)
+        {
             Console.WriteLine(" _____                                                                    _");
             Console.WriteLine("|_   _|                                                                  (_)");
             Console.WriteLine("  | |  _ __ ___   __ _  __ _  ___     _ __  _ __ ___   ___ ___  ___ ___ _ _ __   __ _");
@@ -59,33 +75,51 @@ namespace ParallelImageProcessing
             Console.WriteLine(@"|_____|_| |_| |_|\__,_|\__, |\___|   | .__/|_|  \___/ \___\___||___/___/_|_| |_|\__, |");
             Console.WriteLine("                        __/ |        | |                                         __/ |");
             Console.WriteLine("                       |___/         |_|                                        |___/ ");
-            Console.WriteLine("\nVersion: 1.0");
-            Console.WriteLine("Release date: 8.02.2019\n");
+            Console.WriteLine("\nVersion: 1.1");
+            Console.WriteLine("Release date: 26.09.2020\n");
 
-            Console.WriteLine(string.Format("{0, -7} {1, -11} {2, -10} {3, -6} {4, -7} {5, -10} {6, -10}", "STATUS", "PROCESS", "PARALLEL", "TASKS", "KERNEL", "TIME[ms]", "DESCRIPTION"));
+            PrintAppParameters(parameters);
+
+            Console.WriteLine(string.Format("{0, -7} {1, -11} {2, -10} {3, -6} {4, -7} {5, -10} {6, -10}", "\nSTATUS", "PROCESS", "PARALLEL", "TASKS", "KERNEL", "TIME[ms]", "DESCRIPTION"));
             Console.WriteLine("--------------------------------------------------------------------------------------");
         }
 
         private static Tuple<string, int, int> GetProgramParameters(string[] args)
         {
+            string strKernelSize;
+            string strTimeout;
             string imagePath;
 
-            if (!string.IsNullOrWhiteSpace(args[1]))
+            if (args[0].Equals(_appName))
             {
-                if (args[1].Contains('/') || args[1].Contains('\\'))
-                    imagePath = args[1];
-                else
-                    imagePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), args[1]);
+                imagePath = args[1];
+                strKernelSize = args[2];
+                strTimeout = args[3];
             }
             else
+            {
+                imagePath = args[0];
+                strKernelSize = args[1];
+                strTimeout = args[2];
+            }
+
+            if (string.IsNullOrWhiteSpace(imagePath))
                 throw new ArgumentException("Incorrect image path passed.");
 
-            if (!int.TryParse(args[2], out int kernelSize) || kernelSize < 3 || kernelSize % 2 == 0)
+            if (!int.TryParse(strKernelSize, out int kernelSize) || kernelSize < 3 || kernelSize % 2 == 0)
                 throw new ArgumentException("Incorrect kernel size passed.");
 
-            if (!int.TryParse(args[3], out int parallelOperationTimeout) || parallelOperationTimeout < 1)
+            if (!int.TryParse(strTimeout, out int parallelOperationTimeout) || parallelOperationTimeout < 1)
                 throw new ArgumentException("Incorrect timeout passed.");
+
             return new Tuple<string, int, int>(imagePath, kernelSize, parallelOperationTimeout);
+        }
+
+        private static void PrintAppParameters(Tuple<string, int, int> parameters)
+        {
+            Console.WriteLine($"Image path: {parameters.Item1}");
+            Console.WriteLine($"Kernel size: {parameters.Item2}");
+            Console.WriteLine($"Timeout: {parameters.Item3} ms");
         }
 
         private static void Run(ImageManager manager, Bitmap originalImage, Stopwatch watch, bool useLockBits = true, int kernelSize = 3, float contrast = 0.5f)
@@ -119,7 +153,7 @@ namespace ParallelImageProcessing
             watch.Restart();
             var contrastImage = manager.Contrast(originalImage, contrast);
             watch.Stop();
-            Logger.Success("Contrast", watch.ElapsedMilliseconds, $"{usedMethod}. Contrast: {contrast.ToString()}", false, 1, kernelSize);
+            Logger.Success("Contrast", watch.ElapsedMilliseconds, $"{usedMethod}. Contrast: {contrast}", false, 1, kernelSize);
             Logger.LogToFile("Contrast", false, 1, 0, watch.ElapsedMilliseconds, usedMethod);
 
             manager.Save(blurImage, "blur.jpg");

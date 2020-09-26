@@ -29,11 +29,8 @@ namespace ParallelImageProcessing
 
             try
             {
-                if (imagePath.Contains('\\'))
-                    _imagesFolderPath = imagePath.Substring(0, imagePath.LastIndexOf('\\'));
-                else
-                    _imagesFolderPath = imagePath.Substring(0, imagePath.LastIndexOf('/'));
-
+                _imagesFolderPath = Path.GetDirectoryName(imagePath);
+                Console.WriteLine(_imagesFolderPath, imagePath);
                 return new Bitmap(imagePath);
             }
             catch (Exception ex)
@@ -59,7 +56,7 @@ namespace ParallelImageProcessing
 
             try
             {
-                string imagePath = $@"{_imagesFolderPath}\{imageName}";
+                string imagePath = Path.Combine(_imagesFolderPath, imageName);
                 image.Save(imagePath);
                 return imagePath;
             }
@@ -155,6 +152,8 @@ namespace ParallelImageProcessing
 
                     // Lock image for next multithreading processing.
                     var data = bmp.LockBits(rectangle, ImageLockMode.ReadWrite, bmp.PixelFormat);
+                    
+                    // Convert from bits to bytes to use in the byte array later.
                     int colorDepth = Bitmap.GetPixelFormatSize(data.PixelFormat) / 8;
                     byte[] buffer = new byte[bmp.Width * bmp.Height * colorDepth];
 

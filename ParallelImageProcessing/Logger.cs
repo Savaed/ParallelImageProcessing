@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace ParallelImageProcessing
 {
@@ -69,7 +70,10 @@ namespace ParallelImageProcessing
         {
             for (int i = 0; i < beepNumbers; i++)
             {
-                Console.Beep(frequency, duration);
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    Console.Beep(frequency, duration);
+                else
+                    Console.Beep();
             }
         }
 
@@ -83,7 +87,7 @@ namespace ParallelImageProcessing
                               status,
                               process,
                               parallel ? "Yes" : "No",
-                              tasksNumber, 
+                              tasksNumber,
                               kernelSize > 0 ? $"{kernelSize.ToString()}x{kernelSize.ToString()}" : " -",
                               miliseconds,
                               description));
